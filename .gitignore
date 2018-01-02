@@ -1,0 +1,12 @@
+/.DS_Store
+#*.*#
+/terraform/#variables.tf#
+/terraform/variables.tf
+.terraform/
+/terraform.tfstate.backup
+/terraform.tfstate
+/.terraform.tfstate.lock.info
+*~
+makefile
+
+templates/\.DS_Store
