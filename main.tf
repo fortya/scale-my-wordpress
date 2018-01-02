@@ -330,7 +330,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
     target_origin_id       = "webserver-origin"
-    path_pattern           = "/${var.secret_login_path}.php*"
+    path_pattern           = "${var.secret_login_path}*"
     viewer_protocol_policy = "redirect-to-https"
 
     min_ttl     = 0
@@ -378,7 +378,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
     target_origin_id       = "webserver-origin"
-    path_pattern           = "/{var.secret_admin_path}/*"
+    path_pattern           = "${var.secret_admin_path}*"
     viewer_protocol_policy = "redirect-to-https"
 
     min_ttl     = 0
