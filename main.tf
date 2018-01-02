@@ -431,7 +431,7 @@ resource "aws_s3_bucket" "wp-content" {
                   "AWS": "*"
               },
               "Action": "s3:GetObject",
-              "Resource": "${aws_s3_bucket.wp-content.arn}/*"
+              "Resource": "arn:aws:s3:::${var.app_name}.${var.app_instance}.${var.app_stage}.assets/*"
           }
       ]
   }
