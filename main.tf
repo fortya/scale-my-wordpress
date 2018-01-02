@@ -420,23 +420,6 @@ resource "aws_s3_bucket" "wp-content" {
   bucket = "${var.app_name}.${var.app_instance}.${var.app_stage}.assets"
   acl    = "public-read"
 
-  policy = <<EOF
-  {
-      "Version": "2008-10-17",
-      "Statement": [
-          {
-              "Sid": "PublicReadForGetBucketObjects",
-              "Effect": "Allow",
-              "Principal": {
-                  "AWS": "*"
-              },
-              "Action": "s3:GetObject",
-              "Resource": "arn:aws:s3:::${var.app_name}.${var.app_instance}.${var.app_stage}.assets/*"
-          }
-      ]
-  }
-  EOF
-
   cors_rule {
     allowed_headers = ["Authorization"]
     allowed_methods = ["GET"]
