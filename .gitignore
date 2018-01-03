@@ -10,3 +10,5 @@
 makefile
 
 templates/\.DS_Store
+/templates/launch/.#server_worker.tpl
+/templates/launch/#server_worker.tpl#

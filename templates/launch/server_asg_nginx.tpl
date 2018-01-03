@@ -12,7 +12,6 @@ sudo yum install -y nfs-utils
 sudo service httpd stop
 sudo yum remove httpd* php* -y
 
-
 sudo yum install nginx -y
 
 # automatically includes php70-cli php70-common php70-json php70-process php70-xml
@@ -48,7 +47,6 @@ while [[ $results != 0 ]]; do
 done
 
 # mount file system
-mkdir -p ${app_root}
 sudo chown -R ${nginx_user}:${nginx_group} ${app_root}
 sudo echo "${efs_dnsname}:/ ${app_root} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=24,_netdev 0 0" >> /etc/fstab
 sudo mount -a -t nfs4
