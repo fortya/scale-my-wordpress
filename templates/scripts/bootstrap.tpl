@@ -22,7 +22,7 @@ if [ ! -d ${wp-path} ]; then
          wget -P ${wp-path}/ https://s3.amazonaws.com/aws-refarch/wordpress/latest/bits/opcache-instanceid.php
        fi
 
-       #wp plugin install hide-my-wp --activate
+       wp plugin install hide-my-wp --activate
        wp plugin install ssl-insecure-content-fixer --activate
        wp plugin install use-google-libraries --activate
        wp plugin install google-webfont-optimizer --activate
