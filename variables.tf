@@ -45,12 +45,11 @@ variable "nginx_group" {
 }
 
 variable "wordpress_user" {
-  default = "admin"
-}
-variable "wordpress_pass" {
-  default = "pass"
+  default = "scalepress"
 }
 
+variable "wordpress_pass" { }
+variable "wordpress_admin_email" { }
 
 variable "wp-path" {
   default = "/var/www/html/htdocs/wordpress"

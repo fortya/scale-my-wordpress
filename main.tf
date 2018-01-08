@@ -67,8 +67,9 @@ data "template_file" "bootstrap" {
 
     app_domain_name   = "${var.elb_dns_alias}"
 
-    wordpress_user    = "${var.wordpress_user}"
-    wordpress_pass    = "${var.wordpress_pass}"
+    wordpress_admin_user    = "${var.wordpress_user}"
+    wordpress_admin_pass    = "${var.wordpress_pass}"
+    wordpress_admin_email   = "${var.wordpress_admin_email}"
   }
 }
 
