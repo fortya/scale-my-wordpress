@@ -57,7 +57,6 @@ HOME=/
 sleep 61
 
 # START WEBSERVER
-echo "-_-" >> ${app_root}/health.html
 sudo chkconfig httpd on
 sudo chkconfig php-fpm on
 sudo service nginx start
