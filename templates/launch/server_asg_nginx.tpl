@@ -47,6 +47,7 @@ while [[ $results != 0 ]]; do
 done
 
 # mount file system
+mkdir -p ${app_root}
 sudo chown -R ${nginx_user}:${nginx_group} ${app_root}
 sudo echo "${efs_dnsname}:/ ${app_root} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=24,_netdev 0 0" >> /etc/fstab
 sudo mount -a -t nfs4

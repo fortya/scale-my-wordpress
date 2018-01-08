@@ -31,6 +31,7 @@ sudo echo "${conf_nginx}" > /etc/nginx/nginx.conf
 sudo echo "${conf_nginx_wordpress}" > /etc/nginx/sites-available/wordpress
 sudo echo "${conf_www}" > /etc/php-fpm.d/www.conf
 sudo echo "${conf_php}" > /etc/php-fpm.conf
+sudo echo "${bootstrap}" > ${app_root}/../bootstrap.sh
 
 # wait for file system DNS name to be propagated
 results=1
@@ -54,9 +55,6 @@ HOME=/
 " > /etc/cron.d/mount_efs
 
 sleep 61
-
-# Install Wordpress
-${bootstrap}
 
 # START WEBSERVER
 echo "-_-" >> ${app_root}/health.html

@@ -18,15 +18,15 @@ if ! $$(wp core is-installed --path='${wp-path}' --allow-root); then
      wget -P ${wp-path}/ https://s3.amazonaws.com/aws-refarch/wordpress/latest/bits/opcache-instanceid.php
    fi
 
-   wp plugin install hide-my-wp --activate
-   wp plugin install ssl-insecure-content-fixer --activate
-   wp plugin install use-google-libraries --activate
-   wp plugin install google-webfont-optimizer --activate
-   wp plugin install w3-total-cache --activate
+   sudo -u ${nginx_user} -i -- wp plugin install hide-my-wp --activate --path='${wp-path}'
+   sudo -u ${nginx_user} -i -- wp plugin install ssl-insecure-content-fixer --activate --path='${wp-path}'
+   sudo -u ${nginx_user} -i -- wp plugin install use-google-libraries --activate --path='${wp-path}'
+   sudo -u ${nginx_user} -i -- wp plugin install google-webfont-optimizer --activate --path='${wp-path}'
+   sudo -u ${nginx_user} -i -- wp plugin install w3-total-cache --activate --path='${wp-path}'
 
    # set permissions of wordpress site directories
-   chown -R ${nginx_user}:${nginx_group} ${wp-path}
-   chmod u+wrx ${wp-path}/wp-content/*
+   sudo chown -R ${nginx_user}:${nginx_group} ${wp-path}
+   sudo chmod u+wrx ${wp-path}/wp-content/*
 fi
 RESULT=$$?
 if [ $$RESULT -eq 0 ]; then
