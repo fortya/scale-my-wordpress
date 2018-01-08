@@ -7,10 +7,9 @@ fi
 mkdir -p ${wp-path}
 yum install -y mysql
 
-cd ${wp-path}
 # install wordpress if not installed
 # use public alb host name if wp domain name was empty
-if ! $$(wp core is-installed --allow-root); then
+if ! $$(wp core is-installed --path='${wp-path}' --allow-root); then
    sudo -u ${nginx_user} -i -- wp core download --locale='en_GB' --path='${wp-path}' --allow-root
    sudo -u ${nginx_user} -i -- wp core config --dbname='${mysql_db}' --dbuser='${mysql_user}' --dbpass='${mysql_pass}' --dbhost='${mysql_host}' --path='${wp-path}'
    sudo -u ${nginx_user} -i -- wp core install --url='${app_domain_name}' --title='Scalepress v1.05' --admin_user='${wordpress_admin_user}' --admin_password='${wordpress_admin_pass}' --path='${wp-path}' --admin_email='${wordpress_admin_email}'
