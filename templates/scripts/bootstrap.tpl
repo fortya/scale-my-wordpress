@@ -31,7 +31,7 @@ fi
 RESULT=$$?
 if [ $$RESULT -eq 0 ]; then
    touch ${wp-path}/wordpress.initialized
-   echo "-_-" >> ${app_root}/health.html
+   echo "-_-" >> ${wp-path}/health.html
      else
    touch ${wp-path}/wordpress.failed
 fi
