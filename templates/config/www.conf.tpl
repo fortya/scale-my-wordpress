@@ -9,10 +9,10 @@ listen.group = ${nginx_group}
 listen.mode = 0664
 
 pm = dynamic
-pm.max_children = 50
-pm.start_servers = 5
-pm.min_spare_servers = 5
-pm.max_spare_servers = 35
+pm.max_children = 215
+pm.start_servers = 8
+pm.min_spare_servers = 4
+pm.max_spare_servers = 16
 
 slowlog = /var/log/php-fpm/www-slow.log
 

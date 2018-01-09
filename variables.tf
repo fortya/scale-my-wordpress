@@ -54,3 +54,7 @@ variable "wordpress_admin_email" { }
 variable "wp-path" {
   default = "/var/www/html/htdocs/wordpress"
 }
+
+variable "ec2_type" {
+  default = "t2.large"
+}

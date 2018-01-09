@@ -781,7 +781,7 @@ module "rds" {
 resource "aws_launch_configuration" "main" {
   #name                 = "${var.app_name}-${var.app_instance}-${var.app_stage}-web-LC"
   image_id             = "${data.aws_ami.amazon_linux.id}"
-  instance_type        = "t2.small"
+  instance_type        = "${var.ec2_type}"
   security_groups      = ["${aws_security_group.webserver.id}"]
   user_data            = "${data.template_file.webserver_asg.rendered}"
   key_name             = "${var.ssh_key_name}"
