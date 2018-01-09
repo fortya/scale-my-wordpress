@@ -31,7 +31,7 @@ sudo echo "${conf_nginx}" > /etc/nginx/nginx.conf
 sudo echo "${conf_nginx_wordpress}" > /etc/nginx/sites-available/wordpress
 sudo echo "${conf_www}" > /etc/php-fpm.d/www.conf
 sudo echo "${conf_php}" > /etc/php-fpm.conf
-sudo echo "${bootstrap}" > ${app_root}/../bootstrap.sh
+sudo echo "${bootstrap}" > /var/www/html/bootstrap.sh
 
 # wait for file system DNS name to be propagated
 results=1
