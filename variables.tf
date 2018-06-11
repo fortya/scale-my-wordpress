@@ -1,60 +1,100 @@
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
 variable "aws_region" {
-  default = "us-west-2"
+  description = "In which region you want to launch this wordpress"
+  default     = "us-west-2"
 }
-
-variable "mysql_user" {
-  default = "wordpress"
-}
-variable "mysql_pass" {}
-
 
 variable "app_name" {
-  default = "scalepress"
+  description = "Product name."
+  default     = "scalepress"
 }
-variable "app_instance" {}
+
+variable "app_instance" {
+  description = "Application instance name."
+}
+
 variable "app_stage" {
-  default = "dev"
+  description = "Application stage (ie. Dev, Prod, QA, etc)."
+  default     = "dev"
 }
 
-variable "secret_login_path" {}
-variable "secret_admin_path" {}
+variable "secret_login_path" {
+  description = "Secret path to login to Wordpress. Defaults to `/login`."
+  default     = "login"
+}
 
-variable "hosted_zone_id" {}
-variable "elb_dns_alias" {}
+variable "secret_admin_path" {
+  description = "Secret path to login to Wordpress as an admin. Defaults to `/admin`."
+  default     = "admin"
+}
 
-variable "cloudfront_ssl_arn" {}
-variable "elb_ssl_arn" {}
+variable "hosted_zone_id" {
+  description = "Hosted Zone Id for Route 53. Used to manage DNS."
+}
 
+variable "app_domain" {
+  description = "Application domain (ie. wp.example.com)."
+}
 
-variable "ssh_key_name" {}
-variable "ssh_whitelist_ip" {}
+variable "cloudfront_ssl_arn" {
+  description = "ARN for SSL certificate in Cloudfront."
+}
+
+variable "elb_ssl_arn" {
+  description = "ARN for SSL certificate in ELB."
+}
+
+variable "ssh_key_name" {
+  description = "Key pair for EC2 instances."
+}
+
+variable "ssh_whitelist_ip" {
+  type        = "list"
+  description = "Whitelisted IP addresses for SSH access to EC2 instances."
+}
 
 variable "azs" {
-  default = ["us-west-2a", "us-west-2b", "us-west-2c"]
-  #default = ["us-east-2a", "us-east-2b", "us-east-2c"]
-}
-
-variable "nginx_user" {
-  default = "ec2-user"
-}
-
-variable "nginx_group" {
-  default = "webserver"
+  description = "Availability Zones to launch resources in. Defaults to `us-west-2a` and `us-west-2b`. It must match `aws_region` variable."
+  default     = ["us-west-2a", "us-west-2b"]
 }
 
 variable "wordpress_user" {
-  default = "scalepress"
+  description = "Wordpress Admin username. Defaults to `scalepress`."
+  default     = "scalepress"
 }
 
-variable "wordpress_pass" { }
-variable "wordpress_admin_email" { }
+variable "wordpress_pass" {
+  description = "Wordpress Admin password."
+}
 
-variable "wp-path" {
-  default = "/var/www/html/htdocs/wordpress"
+variable "wordpress_admin_email" {
+  description = "Wordpress Admin email."
+}
+
+variable "mysql_user" {
+  description = "MySQL user for wordpress (defaults to `wordpress`)."
+  default     = "wordpress"
+}
+
+variable "mysql_pass" {
+  description = "MySQL password."
 }
 
 variable "ec2_type" {
-  default = "t2.large"
+  description = "EC2 instance types to run. Defaults to `t2.small`."
+  default     = "t2.small"
+}
+
+variable "nginx_user" {
+  description = "User for nginx. Defaults to `ec2-user`."
+  default     = "ec2-user"
+}
+
+variable "nginx_group" {
+  description = "User Group for nginx. Defaults to `webserver`."
+  default     = "webserver"
+}
+
+variable "wp-path" {
+  description = "Path where wordpress is going to be installed."
+  default     = "/var/www/html/htdocs/wordpress"
 }
