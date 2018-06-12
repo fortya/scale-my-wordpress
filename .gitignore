@@ -1,14 +1,15 @@
-/.DS_Store
-#*.*#
-/terraform/#variables.tf#
-/terraform/variables.tf
-.terraform/
-/terraform.tfstate.backup
-/terraform.tfstate
-/.terraform.tfstate.lock.info
-*~
-makefile
+# Local .terraform directories
+**/.terraform/*
 
-templates/\.DS_Store
-/templates/launch/.#server_worker.tpl
-/templates/launch/#server_worker.tpl#
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore any .tfvars files that are generated automatically for each Terraform run. Most
+# .tfvars files are managed as part of configuration and so should be included in
+# version control.
+#
+local.tfvars

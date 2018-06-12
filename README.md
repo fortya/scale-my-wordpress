@@ -63,7 +63,7 @@ terraform init|plan|apply|destroy
   -var 'hosted_zone_id='
   -var 'cloudfront_ssl_arn='
   -var 'cloudfront_dns_alias='
-  -var 'elb_dns_alias='
+  -var 'app_domain='
   -var 'elb_ssl_arn='
 
   -var 'ssh_key_name='
