@@ -44,10 +44,11 @@ Security, Availability, Scalability.
 # Clean Install
 1. Deploy with 1 node
 2. ssh into node
+3. Enable "SSL Insecure Content Fixer settings"
 
 ```
 cd /var/www/html
-sudo sh bootstrap.sh
+sh bootstrap.sh
 ```
 
 3. go party you are done
