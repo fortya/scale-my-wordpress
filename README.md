@@ -71,10 +71,10 @@ aws s3 sync . s3://smwp.[app_instance].[app_stage].config --exclude "wp-content/
 
 # WordPress Plugins
 - [Hide My WP](https://wordpress.org/plugins/hide-my-wp/): Protect your WordPress website by hiding the WordPress Admin and Login URLs to increases your Wp Security against hacker’s bots.
-- [WordPress Force HTTPS] (https://wordpress.org/plugins/wp-force-https/): Forces your entire site to ALWAYS use HTTPS
+- [WordPress Force HTTPS](https://wordpress.org/plugins/wp-force-https/) : Forces your entire site to ALWAYS use HTTPS
 - [Use Google Libraries](https://wordpress.org/plugins/wp-force-https/): This plugin allows your WordPress site to use the content distribution
 network side of Google’s AJAX Library API, rather than serving these files from your WordPress install directly.
-- [Google Webfont Optimizer] (https://wordpress.org/plugins/google-webfont-optimizer/): Google WebFont Optimizer finds every Google Fonts request, bulks them all together so your website only asks Google once for the fonts, instead of multiple times.
+- [Google Webfont Optimizer](https://wordpress.org/plugins/google-webfont-optimizer/): Google WebFont Optimizer finds every Google Fonts request, bulks them all together so your website only asks Google once for the fonts, instead of multiple times.
 
 ## Inputs
 
