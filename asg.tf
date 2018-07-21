@@ -1,29 +1,9 @@
 resource "aws_launch_configuration" "main" {
-  #name                 = "${var.app_name}-${var.app_instance}-${var.app_stage}-web-LC"
-  image_id             = "${data.aws_ami.amazon_linux.id}"
-  instance_type        = "${var.ec2_type}"
-  security_groups      = ["${aws_security_group.webserver.id}"]
-  user_data            = "${data.template_file.webserver_asg.rendered}"
-  key_name             = "${var.ssh_key_name}"
-  iam_instance_profile = "${aws_iam_instance_profile.webserver.id}"
-
-  ebs_block_device {
-    volume_size = 200
-    volume_type = "gp2"
-    device_name = "/dev/sdg"
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_launch_configuration" "worker" {
   #name                 = "${var.app_name}-${var.app_instance}-${var.app_stage}-worker-LC"
   image_id             = "${data.aws_ami.amazon_linux.id}"
   instance_type        = "t2.small"
   security_groups      = ["${aws_security_group.webserver.id}"]
-  user_data            = "${data.template_file.webserver_worker.rendered}"
+  user_data            = "${data.template_file.webserver.rendered}"
   key_name             = "${var.ssh_key_name}"
   iam_instance_profile = "${aws_iam_instance_profile.webserver.id}"
 
@@ -41,11 +21,11 @@ resource "aws_launch_configuration" "worker" {
 resource "aws_autoscaling_group" "main" {
   vpc_zone_identifier       = ["${module.vpc.public_subnets}"]
   name                      = "${var.app_name}-${var.app_instance}-${var.app_stage}-web-asg"
-  max_size                  = 5
-  min_size                  = 2
+  max_size                  = 1
+  min_size                  = 1
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 2
+  desired_capacity          = 1
   wait_for_elb_capacity     = "2"
   force_delete              = true
 

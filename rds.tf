@@ -26,6 +26,8 @@ module "rds" {
   monitoring_interval = "30"
   monitoring_role_arn = "${aws_iam_role.rds_enhanced_monitoring.arn}"
 
+  create_db_option_group = false
+
   tags = {
     Terraform   = "true"
     Environment = "${var.app_stage}"

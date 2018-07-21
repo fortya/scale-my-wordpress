@@ -1,8 +1,8 @@
-module "efs" {
+module "efs-wpconfig" {
   source    = "git::https://github.com/okio/terraform-aws-efs.git?ref=master"
   name      = "${var.app_instance}"
-  namespace = "${var.app_name}"
-  stage     = "${var.app_stage}-wpconfig"
+  namespace = "${var.app_name}_wpconfig"
+  stage     = "${var.app_stage}"
 
   aws_region = "${var.aws_region}"
   vpc_id     = "${module.vpc.vpc_id}"
@@ -17,7 +17,7 @@ module "efs" {
 module "efs-wpinclude" {
   source    = "git::https://github.com/okio/terraform-aws-efs.git?ref=master"
   name      = "${var.app_instance}"
-  namespace = "${var.app_name}-wpinclude"
+  namespace = "${var.app_name}_wpinclude"
   stage     = "${var.app_stage}"
 
   aws_region = "${var.aws_region}"

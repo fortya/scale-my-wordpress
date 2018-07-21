@@ -5,7 +5,6 @@ sudo yum update -y
 sudo groupadd ${nginx_group}
 sudo usermod -a -G ${nginx_group} ${nginx_user}
 
-# EFS
 sudo yum install -y nfs-utils
 
 sudo yum remove httpd* php* -y
@@ -31,7 +30,9 @@ sudo echo "${conf_nginx}" > /etc/nginx/nginx.conf
 sudo echo "${conf_nginx_wordpress}" > /etc/nginx/sites-available/wordpress
 sudo echo "${conf_www}" > /etc/php-fpm.d/www.conf
 sudo echo "${conf_php}" > /etc/php-fpm.conf
-sudo echo "${bootstrap}" > /var/www/html/bootstrap.sh
+sudo echo -e "${bootstrap}" > /var/www/html/bootstrap.sh
+
+/var/www/html/bootstrap.sh
 
 # wait for file system DNS name to be propagated
 results=1
@@ -43,18 +44,14 @@ while [[ $results != 0 ]]; do
   fi
 done
 
-# mount file system
 mkdir -p ${app_root}
 sudo chown -R ${nginx_user}:${nginx_group} ${app_root}
 sudo echo "${efs_dnsname}:/ ${app_root} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=24,_netdev 0 0" >> /etc/fstab
 sudo mount -a -t nfs4
-
 echo "PATH=/sbin:/bin:/usr/sbin:/usr/bin
 HOME=/
 * * * * * root mount -a -t nfs4
 " > /etc/cron.d/mount_efs
-
-sleep 61
 
 # START WEBSERVER
 sudo chkconfig httpd on
@@ -71,17 +68,3 @@ HOME=/
 */5 * * * * root aws s3 sync ${app_root}/wp-includes/ s3://${static_content_bucket}/wp-includes/
 */5 * * * * root aws s3 sync ${app_root}/wp-config/ s3://${wordpress_config_bucket} --exclude "wp-content/*" --exclude "wp-includes/*"
 " > /etc/cron.d/backup_to_s3
-
-# ASSET WATCH
-mkdir /opt/watch-includes
-chown ec2-user /opt/watch-includes
-
-su ec2-user <<'EOF'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
-. ~/.nvm/nvm.sh
-. ~/.bashrc
-nvm install 9.2.0
-npm install --prefix /opt/watch-includes watch forever
-echo "${sync_js}" > /opt/watch-includes/main.js
-/opt/watch-includes/node_modules/forever/bin/forever start /opt/watch-includes/main.js
-EOF

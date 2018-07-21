@@ -1,15 +1,25 @@
 variable "aws_region" {
-  description = "In which region you want to launch this wordpress"
+  description = "Which aws region? (us-west-2, us-west-1 ...) "
   default     = "us-west-2"
 }
 
+variable "aws_profile" {
+  type        = "string"
+  description = "Which AWS Profile"
+  default     = "default"
+}
+
 variable "app_name" {
-  description = "Product name."
-  default     = "scalepress"
+  description = "Solution Identifier"
+  default     = "smwp"
+}
+
+variable "app_version" {
+  default = "1.0.6"
 }
 
 variable "app_instance" {
-  description = "Application instance name."
+  description = "Unique deployment id"
 }
 
 variable "app_stage" {
@@ -32,7 +42,7 @@ variable "hosted_zone_id" {
 }
 
 variable "app_domain" {
-  description = "Application domain (ie. wp.example.com)."
+  description = "Application domain (ie. dev.example.com)"
 }
 
 variable "cloudfront_ssl_arn" {
@@ -54,7 +64,17 @@ variable "ssh_whitelist_ip" {
 
 variable "azs" {
   description = "Availability Zones to launch resources in. Defaults to `us-west-2a` and `us-west-2b`. It must match `aws_region` variable."
-  default     = ["us-west-2a", "us-west-2b"]
+  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
+}
+
+variable "private_subnets" {
+  description = "Ip range for VPC private_subnets"
+  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+}
+
+variable "public_subnets" {
+  description = "Ip range for VPC public_subnets"
+  default     = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }
 
 variable "wordpress_user" {

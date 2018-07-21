@@ -37,6 +37,7 @@ data "template_file" "bootstrap" {
     app_name     = "${var.app_name}"
     app_instance = "${var.app_instance}"
     app_stage    = "${var.app_stage}"
+    app_version  = "${var.app_version}"
 
     nginx_user  = "${var.nginx_user}"
     nginx_group = "${var.nginx_group}"
@@ -87,8 +88,8 @@ data "template_file" "www_conf" {
   }
 }
 
-data "template_file" "webserver_asg" {
-  template = "${file("${path.module}/templates/launch/server_asg_nginx.tpl")}"
+data "template_file" "webserver" {
+  template = "${file("${path.module}/templates/launch/webserver.tpl")}"
 
   vars {
     app_name     = "${var.app_name}"
@@ -96,38 +97,8 @@ data "template_file" "webserver_asg" {
     app_root     = "${var.wp-path}"
     app_stage    = "${var.app_stage}"
 
-    efs_dnsname = "${module.efs.dns_name}"
-    efs_host    = "${module.efs.host}"
-
-    efs_wpinclude_dnsname = "${module.efs-wpinclude.dns_name}"
-    efs_wpinclude_host    = "${module.efs-wpinclude.host}"
-
-    static_content_bucket   = "${aws_s3_bucket.wp-content.id}"
-    wordpress_config_bucket = "${aws_s3_bucket.wp-config.id}"
-
-    nginx_user           = "${var.nginx_user}"
-    nginx_group          = "${var.nginx_group}"
-    conf_nginx           = "${data.template_file.nginx.rendered}"
-    conf_nginx_wordpress = "${data.template_file.wordpress.rendered}"
-    conf_www             = "${data.template_file.www_conf.rendered}"
-    conf_httpd           = "${data.template_file.httpd_conf.rendered}"
-    conf_php             = "${data.template_file.php_ini.rendered}"
-
-    sync_js = "${data.template_file.sync.rendered}"
-  }
-}
-
-data "template_file" "webserver_worker" {
-  template = "${file("${path.module}/templates/launch/server_worker.tpl")}"
-
-  vars {
-    app_name     = "${var.app_name}"
-    app_instance = "${var.app_instance}"
-    app_root     = "${var.wp-path}"
-    app_stage    = "${var.app_stage}"
-
-    efs_dnsname = "${module.efs.dns_name}"
-    efs_host    = "${module.efs.host}"
+    efs_dnsname = "${module.efs-wpconfig.dns_name}"
+    efs_host    = "${module.efs-wpconfig.host}"
 
     efs_wpinclude_dnsname = "${module.efs-wpinclude.dns_name}"
     efs_wpinclude_host    = "${module.efs-wpinclude.host}"

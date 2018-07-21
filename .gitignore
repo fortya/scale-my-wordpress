@@ -13,3 +13,4 @@ crash.log
 # version control.
 #
 local.tfvars
+terraform.tfvars
