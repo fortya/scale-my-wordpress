@@ -21,10 +21,9 @@ if ! \$$(wp core is-installed --path='${wp-path}' --allow-root); then
    fi
 
    sudo -u ${nginx_user} -i -- wp plugin install hide-my-wp --activate --path='${wp-path}'
-   sudo -u ${nginx_user} -i -- wp plugin install ssl-insecure-content-fixer --activate --path='${wp-path}'
+   sudo -u ${nginx_user} -i -- wp plugin install wp-force-https --activate --path='${wp-path}'
    sudo -u ${nginx_user} -i -- wp plugin install use-google-libraries --activate --path='${wp-path}'
    sudo -u ${nginx_user} -i -- wp plugin install google-webfont-optimizer --activate --path='${wp-path}'
-   sudo -u ${nginx_user} -i -- wp plugin install w3-total-cache --activate --path='${wp-path}'
 
    # set permissions of wordpress site directories
    sudo chown -R ${nginx_user}:${nginx_group} ${wp-path}
