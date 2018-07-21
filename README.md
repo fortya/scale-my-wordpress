@@ -45,8 +45,11 @@ Security, Availability, Scalability.
 1. Deploy with 1 node
 2. ssh into node
 
-```cd /var/www/html
-sudo sh bootstrap.sh```
+```
+cd /var/www/html
+sudo sh bootstrap.sh
+```
+
 3. go party you are done
 
 
